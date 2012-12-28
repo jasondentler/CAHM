@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Microsoft.AspNet.SignalR;
 
 namespace CAHM.UI
 {
@@ -11,6 +12,8 @@ namespace CAHM.UI
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
+            RouteTable.Routes.MapHubs();
+
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
