@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using CAHM.ViewModels;
 
 namespace CAHM.UI.Controllers
 {
@@ -8,7 +9,7 @@ namespace CAHM.UI.Controllers
         [HttpGet]
         public ViewResult Setup()
         {
-            return View();
+            return View(new Player());
         }
 
     }

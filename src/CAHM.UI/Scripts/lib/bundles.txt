@@ -3,3 +3,4 @@ jquery-1.7.1.js
 jquery-ui-1.8.20.js
 jquery-signalR-1.0.0-rc1.min.js
 knockout-2.1.0.js
+md5.js
