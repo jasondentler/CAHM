@@ -15,5 +15,7 @@ $(function () {
     }
 
     $('#player-email input')
-        .change(updateGravatar);
+        .change(updateGravatar)
+        .keyup(updateGravatar);
+    
 });
