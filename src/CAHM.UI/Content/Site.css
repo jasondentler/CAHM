@@ -60,26 +60,23 @@ textarea {
     display: none;
 }
 
+/* Layout Style
+-----------------------------------------------------------*/
 body {
     text-align: center;
 }
 
 #content {
     text-align: left;
-    display: inline-block;
-    margin-top: 100px;
 }
 
-h2.ghost
-{
-    width: 100%;
-    display: block;
-    text-align: center;
+h2.ghost {
     color: #CCCCCC;
-    font-size: 15em;
+    font-size: 200px;
+    line-height: 200px;
     position: absolute;
     z-index: -1;
-    top: 150px;
+    display: block;
 }
 
 /* Player Setup
