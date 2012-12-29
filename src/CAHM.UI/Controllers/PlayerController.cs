@@ -1,15 +1,22 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using CAHM.ViewModels;
 
 namespace CAHM.UI.Controllers
 {
-    public class PlayerController : Controller
+    public partial class PlayerController : Controller
     {
 
-        [HttpGet]
-        public ViewResult Setup()
+        [HttpGet, ModelStateToTempData]
+        public virtual ViewResult Setup(string id)
         {
             return View(new Player());
+        }
+
+        [HttpPost, ModelStateToTempData]
+        public virtual RedirectToRouteResult Setup(Player model)
+        {
+            throw new NotImplementedException();
         }
 
     }

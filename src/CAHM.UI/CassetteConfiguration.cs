@@ -20,7 +20,7 @@ namespace CAHM.UI
             bundles.AddPerSubDirectory<StylesheetBundle>("Content");
             bundles.AddPerSubDirectory<ScriptBundle>("Scripts");
 
-            bundles.AddUrlWithAlias<ScriptBundle>("~/signalr/hubs", "~/signalr", bundle => bundle.AddReference("~/Scripts/lib/"));
+            bundles.AddUrlWithAlias<ScriptBundle>("/signalr/hubs", "~/signalr", bundle => bundle.AddReference("~/Scripts/lib/"));
 
             // To combine files, try something like this instead:
             //   bundles.Add<StylesheetBundle>("Content");

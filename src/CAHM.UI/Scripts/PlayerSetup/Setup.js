@@ -1,21 +1,24 @@
 ﻿///<reference path="~/Scripts/lib/" />
 ///<reference path="~/signalr" />
 $(function () {
+    $(':input:visible:first').focus();
+
+    $('#playerSetup #email')
+        .change(updateGravatar)
+        .keyup(updateGravatar);
+
+    updateGravatar();
 
     function gravatarUrl() {
         var grav = "";
-        var email = $('#player-email input').val().toLowerCase().trim();
+        var email = $('#playerSetup #email').val().toLowerCase().trim();
         var hash = CryptoJS.MD5(email);
-        grav = "http://www.gravatar.com/avatar/" + hash + ".jpg?r=pg&s=50&d=mm";
+        grav = "http://www.gravatar.com/avatar/" + hash + ".jpg?r=pg&s=30&d=mm";
         return grav;
     }
 
     function updateGravatar() {
-        $('#player-email img').attr('src', gravatarUrl());
+        $('#playerSetup .gravatar').attr('src', gravatarUrl());
     }
 
-    $('#player-email input')
-        .change(updateGravatar)
-        .keyup(updateGravatar);
-    
 });

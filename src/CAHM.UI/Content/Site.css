@@ -60,29 +60,45 @@ textarea {
     display: none;
 }
 
+body {
+    text-align: center;
+}
+
+#content {
+    text-align: left;
+    display: inline-block;
+    margin-top: 100px;
+}
+
+h2.ghost
+{
+    width: 100%;
+    display: block;
+    text-align: center;
+    color: #CCCCCC;
+    font-size: 15em;
+    position: absolute;
+    z-index: -1;
+    top: 150px;
+}
+
 /* Player Setup
 -----------------------------------------------------------*/
 
-#player-email img {
+.gravatar {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
     padding: 0;
-    margin: 2px;
     vertical-align: middle;
 }
 
-#player-email div {
+#emailContainer .gravatar 
+{
+    margin-left: 5px;
+}
+
+#emailContainer {
     display: inline-block;
-    vertical-align: middle;
 }
 
-#player-email input {
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: none;
-    background-color: #dddddd;
-    width: 20em;
-    padding: 5px;
-}

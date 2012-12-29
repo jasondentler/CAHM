@@ -1,5 +1,4 @@
 ﻿@{
-    Bundles.Reference("~/Content/themes/base/jquery.ui.all.css");
     Bundles.Reference("~/Content");
 }
 <!DOCTYPE html>
@@ -11,8 +10,14 @@
     @Bundles.RenderStylesheets()
     @Bundles.RenderScripts("top")
 </head>
-<body>
-    @RenderBody()
-    @Bundles.RenderScripts()
-</body>
+    <body>
+        @if (ViewBag.Title != null)
+        {
+            <h2 class="ghost">@ViewBag.Title</h2>
+        }
+        <div id="content">
+            @RenderBody()
+        </div>
+        @Bundles.RenderScripts()
+    </body>
 </html>
