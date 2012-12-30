@@ -24,7 +24,7 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class MVC
 {
-    public static CAHM.UI.Controllers.PlayerController Player = new CAHM.UI.Controllers.T4MVC_PlayerController();
+    public static CAHM.UI.Controllers.SetupController Setup = new CAHM.UI.Controllers.T4MVC_SetupController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -84,6 +84,8 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string center_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/center.min.js") ? Url("center.min.js") : Url("center.js");
+                          
+            public static readonly string geolocation_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/geolocation.min.js") ? Url("geolocation.min.js") : Url("geolocation.js");
                           
         }
     

@@ -13,7 +13,7 @@ $(function () {
         var grav = "";
         var email = $('#playerSetup #email').val().toLowerCase().trim();
         var hash = CryptoJS.MD5(email);
-        grav = "http://www.gravatar.com/avatar/" + hash + ".jpg?r=pg&s=30&d=mm";
+        grav = "http://www.gravatar.com/avatar/" + hash + ".jpg?r=pg&s=28&d=mm";
         return grav;
     }
 
@@ -21,4 +21,8 @@ $(function () {
         $('#playerSetup .gravatar').attr('src', gravatarUrl());
     }
 
+});
+
+$(document).bind('location-set', function (e, location) {
+    
 });

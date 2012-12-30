@@ -19,7 +19,7 @@ namespace CAHM.UI
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Player", action = "Setup", id = UrlParameter.Optional }
+                defaults: new { controller = "Setup", action = "NewPlayer", id = UrlParameter.Optional }
             );
         }
     }

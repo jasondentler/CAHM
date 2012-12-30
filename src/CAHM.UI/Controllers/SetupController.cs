@@ -4,17 +4,17 @@ using CAHM.ViewModels;
 
 namespace CAHM.UI.Controllers
 {
-    public partial class PlayerController : Controller
+    public partial class SetupController : Controller
     {
 
         [HttpGet, ModelStateToTempData]
-        public virtual ViewResult Setup(string id)
+        public virtual ViewResult NewPlayer(string id)
         {
-            return View(new Player());
+            return View(new NewPlayerModel());
         }
 
         [HttpPost, ModelStateToTempData]
-        public virtual RedirectToRouteResult Setup(Player model)
+        public virtual RedirectToRouteResult NewPlayer(NewPlayerModel model)
         {
             throw new NotImplementedException();
         }

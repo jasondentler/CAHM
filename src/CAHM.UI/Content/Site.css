@@ -82,20 +82,10 @@ h2.ghost {
 /* Player Setup
 -----------------------------------------------------------*/
 
-.gravatar {
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    padding: 0;
-    vertical-align: middle;
-}
-
-#emailContainer .gravatar 
+ .gravatar.add-on
 {
-    margin-left: 5px;
-}
-
-#emailContainer {
-    display: inline-block;
+     margin: 0;
+     padding: 0;
+     height: 28px;
 }
 
