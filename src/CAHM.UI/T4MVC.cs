@@ -79,8 +79,8 @@ namespace Links
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class AccountForgotPassword {
-            private const string URLPATH = "~/Scripts/AccountForgotPassword";
+        public static class Account {
+            private const string URLPATH = "~/Scripts/Account";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string page_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/page.min.js") ? Url("page.min.js") : Url("page.js");
@@ -111,6 +111,8 @@ namespace Links
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string center_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/center.min.js") ? Url("center.min.js") : Url("center.js");
+                          
+            public static readonly string focus_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/focus.min.js") ? Url("focus.min.js") : Url("focus.js");
                           
             public static readonly string geolocation_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/geolocation.min.js") ? Url("geolocation.min.js") : Url("geolocation.js");
                           

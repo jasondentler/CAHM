@@ -47,7 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeAccountPasswords.cs" />
+    <Compile Include="CreateAccountResetRequests.cs" />
+    <Compile Include="LogInAccounts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegisterAccounts.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CAHM\CAHM.csproj">

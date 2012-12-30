@@ -70,6 +70,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RavenModule.cs" />
+    <Compile Include="ServiceModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CAHM.Raven\CAHM.Raven.csproj">

@@ -1,11 +1,27 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using System.Web.Security;
 using CAHM.ViewModels;
 
 namespace CAHM.UI.Controllers
 {
     public partial class AccountController : Controller
     {
+        private readonly IRegisterAccounts _registerAccounts;
+        private readonly ILogInAccounts _logInAccounts;
+        private readonly ICreateAccountResetRequests _createAccountResetRequests;
+        private readonly IChangeAccountPasswords _changeAccountPasswords;
+
+        public AccountController(
+            IRegisterAccounts registerAccounts, 
+            ILogInAccounts logInAccounts, 
+            ICreateAccountResetRequests createAccountResetRequests,
+            IChangeAccountPasswords changeAccountPasswords)
+        {
+            _registerAccounts = registerAccounts;
+            _logInAccounts = logInAccounts;
+            _createAccountResetRequests = createAccountResetRequests;
+            _changeAccountPasswords = changeAccountPasswords;
+        }
 
         [HttpGet, ModelStateToTempData]
         public virtual ViewResult Register()
@@ -18,7 +34,17 @@ namespace CAHM.UI.Controllers
         {
             if (!ModelState.IsValid)
                 return RedirectToAction(MVC.Account.Actions.Register());
-            throw new NotImplementedException();
+
+            var errorMessage = _registerAccounts.Register(model.Email, model.Password, model.Location);
+
+            if (!string.IsNullOrEmpty(errorMessage))
+            {
+                ModelState.AddModelError(" ", errorMessage);
+                return RedirectToAction(MVC.Account.Register());
+            }
+
+            FormsAuthentication.RedirectFromLoginPage(model.Email, true);
+            return null;
         }
 
         [HttpGet, ModelStateToTempData]
@@ -31,8 +57,16 @@ namespace CAHM.UI.Controllers
         public virtual RedirectToRouteResult Login(LoginModel model)
         {
             if (!ModelState.IsValid)
-                return RedirectToAction(MVC.Account.Actions.Login());
-            throw new NotImplementedException();
+                return RedirectToAction(MVC.Account.Login());
+            var isValid = _logInAccounts.Login(model.Email, model.Password, model.Location);
+            if (!isValid)
+            {
+                ModelState.AddModelError(" ", "The email / password combination you entered is incorrect.");
+                return RedirectToAction(MVC.Account.Login());
+            }
+
+            FormsAuthentication.RedirectFromLoginPage(model.Email, true);
+            return null;
         }
 
         [HttpGet, ModelStateToTempData]
@@ -44,7 +78,10 @@ namespace CAHM.UI.Controllers
         [HttpPost, ModelStateToTempData]
         public virtual RedirectToRouteResult ForgotPassword(ForgotPasswordModel model)
         {
-            throw new NotImplementedException();
+            if (!ModelState.IsValid)
+                return RedirectToAction(MVC.Account.ForgotPassword());
+
+            _createAccountResetRequests.CreateAccountResetRequest(model.Email);
             return RedirectToAction(MVC.Account.ForgotPasswordConfirmation());
         }
 
@@ -57,7 +94,7 @@ namespace CAHM.UI.Controllers
         [HttpGet, ModelStateToTempData]
         public virtual ViewResult ResetPassword(string email, string requestHash)
         {
-            return View(new ResetPasswordModel()
+            return View(new ResetPasswordModel
                 {
                     Email = email,
                     RequestHash = requestHash
@@ -70,7 +107,7 @@ namespace CAHM.UI.Controllers
             if (!ModelState.IsValid)
                 return RedirectToAction(MVC.Account.ResetPassword(model.Email, model.RequestHash));
 
-            throw new NotImplementedException();
+            _changeAccountPasswords.ChangePassword(model.Email, model.RequestHash, model.Password);
 
             return RedirectToAction(MVC.Account.Login());
         }
