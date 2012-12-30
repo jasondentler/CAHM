@@ -4,23 +4,26 @@
     Bundles.Reference("~/scripts/PlayerSetup/");
 }
 
-
+@Html.ValidationSummary()
 @using (Html.BeginForm(MVC.Setup.Actions.NewPlayer((NewPlayerModel) null), FormMethod.Post, new {id = "playerSetup"}))
 {
-    @Html.HiddenFor(m => m.Location.Latitude)
-    @Html.HiddenFor(m => m.Location.Longitude)
+    @Html.HiddenFor(m => m.Location.Latitude, new {id="latitude"})
+    @Html.HiddenFor(m => m.Location.Longitude, new {id="longitude"})
     <div class="input-prepend input-append" id="emailContainer">
         <span class="add-on"><i class="icon-envelope"></i></span>
         @Html.TextBoxFor(m => m.Email, new {id = "email", placeholder = "Email address"})
         <img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?s=28&r=pg&d=mm" alt="You" class="gravatar add-on"/>
+        @Html.ValidationMessageFor(m=> m.Email, "*")
     </div>
     <div class="input-prepend">
         <span class="add-on"><i class="icon-key"></i></span>
         @Html.PasswordFor(m => m.Password, new {placeholder = "Enter Password"})
+        @Html.ValidationMessageFor(m=> m.Password, "*")
     </div>
     <div class="input-prepend">
         <span class="add-on"><i class="icon-key"></i></span>
         @Html.PasswordFor(m => m.ConfirmPassword, new {placeholder = "Confirm Password"})
+        @Html.ValidationMessageFor(m=> m.ConfirmPassword, "*")
     </div>
     <button class="btn"><i class="icon-signin"></i> Register</button>
 }

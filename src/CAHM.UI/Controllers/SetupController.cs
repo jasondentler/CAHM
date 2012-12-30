@@ -8,7 +8,7 @@ namespace CAHM.UI.Controllers
     {
 
         [HttpGet, ModelStateToTempData]
-        public virtual ViewResult NewPlayer(string id)
+        public virtual ViewResult NewPlayer()
         {
             return View(new NewPlayerModel());
         }
@@ -16,6 +16,8 @@ namespace CAHM.UI.Controllers
         [HttpPost, ModelStateToTempData]
         public virtual RedirectToRouteResult NewPlayer(NewPlayerModel model)
         {
+            if (!ModelState.IsValid)
+                return RedirectToAction(MVC.Setup.Actions.NewPlayer());
             throw new NotImplementedException();
         }
 
