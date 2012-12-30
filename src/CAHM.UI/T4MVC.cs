@@ -24,7 +24,7 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class MVC
 {
-    public static CAHM.UI.Controllers.SetupController Setup = new CAHM.UI.Controllers.T4MVC_SetupController();
+    public static CAHM.UI.Controllers.AccountController Account = new CAHM.UI.Controllers.T4MVC_AccountController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 

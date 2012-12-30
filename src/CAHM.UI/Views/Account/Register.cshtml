@@ -1,11 +1,11 @@
 ﻿@model NewPlayerModel
 @{
     ViewBag.Title = "New Player";
-    Bundles.Reference("~/scripts/PlayerSetup/");
+    Bundles.Reference("~/scripts/AccountRegister/");
 }
 
 @Html.ValidationSummary()
-@using (Html.BeginForm(MVC.Setup.Actions.NewPlayer((NewPlayerModel) null), FormMethod.Post, new {id = "playerSetup"}))
+@using (Html.BeginForm(MVC.Account.Actions.Register((NewPlayerModel) null), FormMethod.Post, new {id = "playerSetup"}))
 {
     @Html.HiddenFor(m => m.Location.Latitude, new {id="latitude"})
     @Html.HiddenFor(m => m.Location.Longitude, new {id="longitude"})
