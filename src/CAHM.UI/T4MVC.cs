@@ -79,6 +79,24 @@ namespace Links
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class AccountLogin {
+            private const string URLPATH = "~/Scripts/AccountLogin";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string page_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/page.min.js") ? Url("page.min.js") : Url("page.js");
+                          
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class AccountRegister {
+            private const string URLPATH = "~/Scripts/AccountRegister";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string page_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/page.min.js") ? Url("page.min.js") : Url("page.js");
+                          
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class app {
             private const string URLPATH = "~/Scripts/app";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
@@ -109,15 +127,6 @@ namespace Links
             public static readonly string md5_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/md5.min.js") ? Url("md5.min.js") : Url("md5.js");
                           
             public static readonly string modernizr_2_5_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr-2.5.3.min.js") ? Url("modernizr-2.5.3.min.js") : Url("modernizr-2.5.3.js");
-                          
-        }
-    
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class PlayerSetup {
-            private const string URLPATH = "~/Scripts/PlayerSetup";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string Setup_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Setup.min.js") ? Url("Setup.min.js") : Url("Setup.js");
                           
         }
     

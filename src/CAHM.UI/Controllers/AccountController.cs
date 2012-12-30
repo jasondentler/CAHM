@@ -10,11 +10,11 @@ namespace CAHM.UI.Controllers
         [HttpGet, ModelStateToTempData]
         public virtual ViewResult Register()
         {
-            return View(new NewPlayerModel());
+            return View(new RegisterModel());
         }
 
         [HttpPost, ModelStateToTempData]
-        public virtual RedirectToRouteResult Register(NewPlayerModel model)
+        public virtual RedirectToRouteResult Register(RegisterModel model)
         {
             if (!ModelState.IsValid)
                 return RedirectToAction(MVC.Account.Actions.Register());

@@ -1,16 +1,15 @@
-﻿@model RegisterModel
+﻿@model LoginModel
 @{
-    ViewBag.Title = "New Player";
-    Bundles.Reference("~/scripts/AccountRegister/");
+    ViewBag.Title = "Returning Player";
+    Bundles.Reference("~/scripts/AccountLogin/");
 }
-
 <p>
-    <a href="@Url.Action(MVC.Account.Login())">I've got an account already. Let me sign in.</a>
+    <a href="@Url.Action(MVC.Account.Register())">I'm new here. Let me register.</a>
 </p>
 <p>
-    <h3>Register</h3>
+    <h3>Log In</h3>
     @Html.ValidationSummary()
-    @using (Html.BeginForm(MVC.Account.Actions.Register((RegisterModel) null), FormMethod.Post, new {id = "playerSetup"}))
+    @using (Html.BeginForm(MVC.Account.Actions.Login((LoginModel) null), FormMethod.Post, new {id = "playerSetup"}))
     {
         @Html.HiddenFor(m => m.Location.Latitude, new {id="latitude"})
         @Html.HiddenFor(m => m.Location.Longitude, new {id="longitude"})
@@ -25,11 +24,7 @@
             @Html.PasswordFor(m => m.Password, new {placeholder = "Enter Password"})
             @Html.ValidationMessageFor(m=> m.Password, "*")
         </div>
-        <div class="input-prepend">
-            <span class="add-on"><i class="icon-key"></i></span>
-            @Html.PasswordFor(m => m.ConfirmPassword, new {placeholder = "Confirm Password"})
-            @Html.ValidationMessageFor(m=> m.ConfirmPassword, "*")
-        </div>
-        <button class="btn"><i class="icon-signin"></i> Register</button>
+        <button class="btn"><i class="icon-signin"></i> Sign In</button>
+
     }
 </p>
