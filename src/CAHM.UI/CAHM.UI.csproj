@@ -213,7 +213,9 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Account\page.js" />
     <Content Include="Scripts\app\center.js" />
+    <Content Include="Scripts\app\focus.js" />
     <Content Include="Scripts\app\geolocation.js" />
     <Content Include="Scripts\AccountLogin\page.js" />
     <Content Include="Scripts\lib\json2.js" />
@@ -244,6 +246,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

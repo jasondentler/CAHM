@@ -35,5 +35,45 @@ namespace CAHM.UI.Controllers
             throw new NotImplementedException();
         }
 
+        [HttpGet, ModelStateToTempData]
+        public virtual ViewResult ForgotPassword()
+        {
+            return View(new ForgotPasswordModel());
+        }
+
+        [HttpPost, ModelStateToTempData]
+        public virtual RedirectToRouteResult ForgotPassword(ForgotPasswordModel model)
+        {
+            throw new NotImplementedException();
+            return RedirectToAction(MVC.Account.ForgotPasswordConfirmation());
+        }
+
+        [HttpGet]
+        public virtual ViewResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet, ModelStateToTempData]
+        public virtual ViewResult ResetPassword(string email, string requestHash)
+        {
+            return View(new ResetPasswordModel()
+                {
+                    Email = email,
+                    RequestHash = requestHash
+                });
+        }
+
+        [HttpPost, ModelStateToTempData]
+        public virtual RedirectToRouteResult ResetPassword(ResetPasswordModel model)
+        {
+            if (!ModelState.IsValid)
+                return RedirectToAction(MVC.Account.ResetPassword(model.Email, model.RequestHash));
+
+            throw new NotImplementedException();
+
+            return RedirectToAction(MVC.Account.Login());
+        }
+
     }
 }
