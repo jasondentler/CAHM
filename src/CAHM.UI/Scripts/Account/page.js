@@ -8,15 +8,22 @@ $(function () {
     updateGravatar();
 
     function gravatarUrl() {
+        var emailField = $('#playerSetup #email');
+        if (emailField.length == 0)
+            return null;
+        
         var grav = "";
-        var email = $('#playerSetup #email').val().toLowerCase().trim();
+        var email = emailField.val().toLowerCase().trim();
         var hash = CryptoJS.MD5(email);
         grav = "http://www.gravatar.com/avatar/" + hash + ".jpg?r=pg&s=28&d=mm";
         return grav;
     }
 
     function updateGravatar() {
-        $('#playerSetup .gravatar').attr('src', gravatarUrl());
+        var gravatar = $('#playerSetup .gravatar');
+        if (gravatar.length == 0)
+            return;
+        gravatar.attr('src', gravatarUrl());
     }
 
 });

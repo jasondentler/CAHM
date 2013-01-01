@@ -25,6 +25,7 @@ using T4MVC;
 public static class MVC
 {
     public static CAHM.UI.Controllers.AccountController Account = new CAHM.UI.Controllers.T4MVC_AccountController();
+    public static CAHM.UI.Controllers.SetupController Setup = new CAHM.UI.Controllers.T4MVC_SetupController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -62,6 +63,21 @@ public class T4MVC_System_Web_Mvc_RedirectToRouteResult : System.Web.Mvc.Redirec
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+public class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult
+{
+    public T4MVC_System_Web_Mvc_ActionResult(string area, string controller, string action, string protocol = null): base()
+    {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
+     
+    public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
     
     public string Controller { get; set; }
     public string Action { get; set; }
