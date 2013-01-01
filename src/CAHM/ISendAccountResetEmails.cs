@@ -1,7 +1,9 @@
-﻿namespace CAHM
+﻿using System;
+
+namespace CAHM
 {
     public interface ISendAccountResetEmails
     {
-        void SendResetEmail(string email, string requestHash);
+        void SendResetEmail(string email, string passwordResetUrl);
     }
 }

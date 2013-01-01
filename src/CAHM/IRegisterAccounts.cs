@@ -4,6 +4,6 @@ namespace CAHM
 {
     public interface IRegisterAccounts
     {
-        string Register(string email, string password, Location location);
+        void Register(string email, string password, Location location);
     }
 }

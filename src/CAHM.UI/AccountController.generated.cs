@@ -112,6 +112,7 @@ namespace CAHM.UI.Controllers
         public class ActionParamsClass_ResetPassword
         {
             public readonly string email = "email";
+            public readonly string requestId = "requestId";
             public readonly string requestHash = "requestHash";
             public readonly string model = "model";
         }
@@ -127,12 +128,14 @@ namespace CAHM.UI.Controllers
             {
                 public readonly string ForgotPassword = "ForgotPassword";
                 public readonly string ForgotPasswordConfirmation = "ForgotPasswordConfirmation";
+                public readonly string InvalidResetRequest = "InvalidResetRequest";
                 public readonly string Login = "Login";
                 public readonly string Register = "Register";
                 public readonly string ResetPassword = "ResetPassword";
             }
             public readonly string ForgotPassword = "~/Views/Account/ForgotPassword.cshtml";
             public readonly string ForgotPasswordConfirmation = "~/Views/Account/ForgotPasswordConfirmation.cshtml";
+            public readonly string InvalidResetRequest = "~/Views/Account/InvalidResetRequest.cshtml";
             public readonly string Login = "~/Views/Account/Login.cshtml";
             public readonly string Register = "~/Views/Account/Register.cshtml";
             public readonly string ResetPassword = "~/Views/Account/ResetPassword.cshtml";
@@ -189,10 +192,11 @@ namespace CAHM.UI.Controllers
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult ResetPassword(string email, string requestHash)
+        public override System.Web.Mvc.ViewResult ResetPassword(string email, string requestId, string requestHash)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ResetPassword);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "email", email);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "requestId", requestId);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "requestHash", requestHash);
             return callInfo;
         }

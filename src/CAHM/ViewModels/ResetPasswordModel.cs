@@ -5,6 +5,10 @@ namespace CAHM.ViewModels
 {
     public class ResetPasswordModel
     {
+
+        [Required]
+        public string RequestId { get; set; }
+
         [Required, Email]
         public string Email { get; set; }
 

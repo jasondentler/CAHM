@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using CAHM.Raven;
 using Ninject.Modules;
+using Ninject.Web.Common;
 
 namespace CAHM.Wireup
 {
@@ -8,7 +9,7 @@ namespace CAHM.Wireup
     {
         public override void Load()
         {
-            var types = new[] {typeof (ILogInAccounts), typeof (LogInAccounts)}
+            var types = new[] {typeof (ILogInAccounts), typeof (LogInAccounts), GetType()}
                 .Select(type => type.Assembly)
                 .SelectMany(assembly => assembly.GetTypes())
                 .ToArray();
@@ -23,7 +24,7 @@ namespace CAHM.Wireup
                     .Where(g => g.Count() == 1)
                     .Select(g => new {service = g.Key, impl = g.Single()})
                     .ToList()
-                    .ForEach(x => Kernel.Bind(x.service).To(x.impl));
+                    .ForEach(x => Kernel.Bind(x.service).To(x.impl).InRequestScope());
         }
     }
 }

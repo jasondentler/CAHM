@@ -1,4 +1,7 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
 using System.Web.Security;
 using CAHM.ViewModels;
 
@@ -35,11 +38,13 @@ namespace CAHM.UI.Controllers
             if (!ModelState.IsValid)
                 return RedirectToAction(MVC.Account.Actions.Register());
 
-            var errorMessage = _registerAccounts.Register(model.Email, model.Password, model.Location);
-
-            if (!string.IsNullOrEmpty(errorMessage))
+            try
             {
-                ModelState.AddModelError(" ", errorMessage);
+                _registerAccounts.Register(model.Email, model.Password, model.Location);
+            }
+            catch (AccountAlreadyExistsException ex)
+            {
+                ModelState.AddModelError(" ", ex.Message);
                 return RedirectToAction(MVC.Account.Register());
             }
 
@@ -81,9 +86,45 @@ namespace CAHM.UI.Controllers
             if (!ModelState.IsValid)
                 return RedirectToAction(MVC.Account.ForgotPassword());
 
-            _createAccountResetRequests.CreateAccountResetRequest(model.Email);
+            GeneratePasswordResetUrl urlFunc = (email, id, hash) =>
+                {
+                    var values = new RouteValueDictionary
+                        {
+                            {"email", email},
+                            {"requestId", id},
+                            {"requestHash", hash}
+                        };
+
+                    var url = Url.Action("ResetPassword", values) ?? "";
+                    var appRoot = HttpRuntime.AppDomainAppVirtualPath ?? "";
+
+                    if ((appRoot).EndsWith("/") && url.StartsWith("/"))
+                        appRoot = appRoot.Substring(0, appRoot.Length - 1);
+
+                    url = appRoot + url;
+
+                    var authority = Request.Url.GetLeftPart(UriPartial.Authority).ToString();
+                    if ((authority).EndsWith("/") && url.StartsWith("/"))
+                        authority = authority.Substring(0, authority.Length - 1);
+
+                    url = authority + url;
+
+                    return url;
+                };
+
+            try
+            {
+                _createAccountResetRequests.CreateAccountResetRequest(model.Email, urlFunc);
+            }
+            catch (ResetRequestAlreadyExistsException ex)
+            {
+                ModelState.AddModelError(" ", ex.Message);
+                return RedirectToAction(MVC.Account.ForgotPassword());
+            }
+
             return RedirectToAction(MVC.Account.ForgotPasswordConfirmation());
         }
+
 
         [HttpGet]
         public virtual ViewResult ForgotPasswordConfirmation()
@@ -92,11 +133,17 @@ namespace CAHM.UI.Controllers
         }
 
         [HttpGet, ModelStateToTempData]
-        public virtual ViewResult ResetPassword(string email, string requestHash)
+        public virtual ViewResult ResetPassword(string email, string requestId, string requestHash)
         {
+            var isValid = _createAccountResetRequests.ValidateAccountResetRequest(email, requestId, requestHash);
+
+            if (!isValid)
+                return View("InvalidResetRequest");
+
             return View(new ResetPasswordModel
                 {
                     Email = email,
+                    RequestId = requestId,
                     RequestHash = requestHash
                 });
         }
@@ -105,9 +152,17 @@ namespace CAHM.UI.Controllers
         public virtual RedirectToRouteResult ResetPassword(ResetPasswordModel model)
         {
             if (!ModelState.IsValid)
-                return RedirectToAction(MVC.Account.ResetPassword(model.Email, model.RequestHash));
+                return RedirectToAction(MVC.Account.ResetPassword(model.Email, model.RequestId, model.RequestHash));
 
-            _changeAccountPasswords.ChangePassword(model.Email, model.RequestHash, model.Password);
+            try
+            {
+                _changeAccountPasswords.ChangePassword(model.Email, model.RequestId, model.RequestHash, model.Password);
+            }
+            catch (InvalidResetRequestException)
+            {
+                ModelState.AddModelError(" ", "Sorry. This password reset request is no longer valid.");
+                return RedirectToAction(MVC.Account.ResetPassword(model.Email, model.RequestId, model.RequestHash));
+            }
 
             return RedirectToAction(MVC.Account.Login());
         }
