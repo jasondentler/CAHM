@@ -22,13 +22,13 @@ using System.Web.Routing;
 using T4MVC;
 namespace CAHM.UI.Controllers
 {
-    public partial class SetupController
+    public partial class NewGameController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SetupController() { }
+        public NewGameController() { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected SetupController(Dummy d) { }
+        protected NewGameController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -46,13 +46,13 @@ namespace CAHM.UI.Controllers
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SetupController Actions { get { return MVC.Setup; } }
+        public NewGameController Actions { get { return MVC.NewGame; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Setup";
+        public readonly string Name = "NewGame";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Setup";
+        public const string NameConst = "NewGame";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -60,13 +60,15 @@ namespace CAHM.UI.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string ListGames = "ListGames";
+            public readonly string List = "List";
+            public readonly string Create = "Create";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string ListGames = "ListGames";
+            public const string List = "List";
+            public const string Create = "Create";
         }
 
 
@@ -80,18 +82,26 @@ namespace CAHM.UI.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string List = "List";
             }
+            public readonly string List = "~/Views/NewGame/List.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_SetupController : CAHM.UI.Controllers.SetupController
+    public class T4MVC_NewGameController : CAHM.UI.Controllers.NewGameController
     {
-        public T4MVC_SetupController() : base(Dummy.Instance) { }
+        public T4MVC_NewGameController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult ListGames()
+        public override System.Web.Mvc.ViewResult List()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ListGames);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.List);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Create()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             return callInfo;
         }
 

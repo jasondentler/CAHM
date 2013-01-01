@@ -50,6 +50,7 @@
     <Compile Include="ChangeAccountPasswords.cs" />
     <Compile Include="CreateAccountResetRequests.cs" />
     <Compile Include="LogInAccounts.cs" />
+    <Compile Include="NewGameService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterAccounts.cs" />
     <Compile Include="UniqueConstraintExtensions.cs" />

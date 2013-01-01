@@ -25,7 +25,7 @@ using T4MVC;
 public static class MVC
 {
     public static CAHM.UI.Controllers.AccountController Account = new CAHM.UI.Controllers.T4MVC_AccountController();
-    public static CAHM.UI.Controllers.SetupController Setup = new CAHM.UI.Controllers.T4MVC_SetupController();
+    public static CAHM.UI.Controllers.NewGameController NewGame = new CAHM.UI.Controllers.T4MVC_NewGameController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -154,6 +154,15 @@ namespace Links
             public static readonly string md5_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/md5.min.js") ? Url("md5.min.js") : Url("md5.js");
                           
             public static readonly string modernizr_2_5_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr-2.5.3.min.js") ? Url("modernizr-2.5.3.min.js") : Url("modernizr-2.5.3.js");
+                          
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class NewGame {
+            private const string URLPATH = "~/Scripts/NewGame";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string page_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/page.min.js") ? Url("page.min.js") : Url("page.js");
                           
         }
     

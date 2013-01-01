@@ -51,6 +51,7 @@
     <Compile Include="ICreateAccountResetRequests.cs" />
     <Compile Include="IHasher.cs" />
     <Compile Include="ILogInAccounts.cs" />
+    <Compile Include="INewGameService.cs" />
     <Compile Include="InvalidResetRequestException.cs" />
     <Compile Include="IRegisterAccounts.cs" />
     <Compile Include="ISendAccountResetEmails.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="ResetRequestAlreadyExistsException.cs" />
     <Compile Include="ViewModels\ForgotPasswordModel.cs" />
     <Compile Include="ViewModels\LoginModel.cs" />
+    <Compile Include="ViewModels\NewGameModel.cs" />
     <Compile Include="ViewModels\RegisterModel.cs" />
     <Compile Include="ViewModels\ResetPasswordModel.cs" />
   </ItemGroup>

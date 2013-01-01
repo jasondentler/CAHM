@@ -101,6 +101,8 @@
     <Compile Include="RavenModule.cs" />
     <Compile Include="SendAccountResetEmails.cs" />
     <Compile Include="ServiceModule.cs" />
+    <Compile Include="SignalRHubActivator.cs" />
+    <Compile Include="SignalRModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CAHM.Raven\CAHM.Raven.csproj">

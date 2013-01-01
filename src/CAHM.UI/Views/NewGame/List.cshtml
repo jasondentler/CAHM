@@ -1,0 +1,15 @@
+﻿@model NewGameModel
+@{
+    ViewBag.Title = "New Game";
+    Bundles.Reference("~/scripts/NewGame/");
+}
+
+<div data-bind="foreach: PendingGames, visible: PendingGames().length > 0" id="pendingGames">
+    <div data-bind="attr: {id: Id}, css: {selected: Id() == $root.SelectedGame()}">
+        <input type="radio" name="@Html.NameFor(m=>m.GameId)" data-bind="value: Id, checked: $root.SelectedGame, attr: {id: '@Html.IdFor(m => m.GameId)' + $index()}" />
+        <label data-bind="foreach: Gravatars, attr: {for: '@Html.IdFor(m => m.GameId)' + $index()}" class="right">
+            <img data-bind="attr: {src: 'http://www.gravatar.com/avatar/' + $data + '?r=pg&s=50&d=mm'}" alt="" class="gravatar"/>
+        </label>
+        <span data-bind="text: Name"></span>
+    </div>
+</div>
