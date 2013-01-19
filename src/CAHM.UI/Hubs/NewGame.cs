@@ -17,22 +17,23 @@ namespace CAHM.UI.Hubs
         public Page<NewGameModel> FindNearbyGames(Location location, int pageNumber)
         {
             var pageOfGames = _newGameService.FindNearby(location, pageNumber);
-
-            pageOfGames.Items
-                       .Select(g => g.Id)
-                       .ToList()
-                       .ForEach(gameId => Groups.Add(Context.ConnectionId, gameId));
-
             return pageOfGames;
         }
 
         public void Join(string id)
         {
             var changedGames = _newGameService.JoinGame(id, Context.User.Identity.Name);
+            Clients.All.UpdateBatch(changedGames);
+        }
 
-            changedGames
-                .ToList()
-                .ForEach(g => Clients.Group(g.Id).Update(g));
+        public void Create()
+        {
+            var email = Context.User.Identity.Name;
+
+            var result = _newGameService.Create(email);
+            //var newGameId = result.Item1;
+            var changedGames = result.Item2.ToList();
+            Clients.All.UpdateBatch(changedGames);
         }
 
     }

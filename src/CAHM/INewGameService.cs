@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using CAHM.Models;
 using CAHM.ViewModels;
 
@@ -10,8 +11,7 @@ namespace CAHM
         Page<NewGameModel> FindNearby(Location location, int pageNumber);
         Page<NewGameModel> Search(string search, int pageNumber);
         IEnumerable<NewGameModel> JoinGame(string gameId, string email);
-        NewGameModel Get(string id);
-        Game Create(string email);
+        Tuple<string, IEnumerable<NewGameModel>> Create(string email);
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using CAHM.Models;
 using CAHM.Raven.IndexDefinitions;
@@ -80,18 +81,22 @@ namespace CAHM.Raven
             return unjoinedGames.Concat(new[] {joinedGame}).Distinct().Select(Convert).ToList();
         }
 
-        public NewGameModel Get(string id)
-        {
-            return Convert(_session.Load<Game>(id));
-        }
-
-        public Game Create(string email)
+        public Tuple<string, IEnumerable<NewGameModel>> Create(string email)
         {
             var account = _session.Query<Account>().SingleOrDefault(a => a.Email == email);
+
+            var unjoinedGames = _session.Query<Game>()
+                                        .Where(g => g.Players.Any(a => a.Email == email))
+                                        .ToList();
+
+            unjoinedGames.ForEach(g => g.Players.RemoveAll(a => a.Email == email));
+
             var game = new Game();
             game.Players.Add(account);
             _session.Store(game);
-            return game;
+            _session.SaveChanges();
+
+            return Tuple.Create(game.Id, unjoinedGames.Concat(new[] {game}).Select(Convert));
         }
 
         private NewGameModel Convert(Game model)
