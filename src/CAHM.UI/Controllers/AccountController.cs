@@ -13,17 +13,20 @@ namespace CAHM.UI.Controllers
         private readonly ILogInAccounts _logInAccounts;
         private readonly ICreateAccountResetRequests _createAccountResetRequests;
         private readonly IChangeAccountPasswords _changeAccountPasswords;
+        private readonly ILocationService _locationService;
 
         public AccountController(
             IRegisterAccounts registerAccounts, 
             ILogInAccounts logInAccounts, 
             ICreateAccountResetRequests createAccountResetRequests,
-            IChangeAccountPasswords changeAccountPasswords)
+            IChangeAccountPasswords changeAccountPasswords,
+            ILocationService locationService)
         {
             _registerAccounts = registerAccounts;
             _logInAccounts = logInAccounts;
             _createAccountResetRequests = createAccountResetRequests;
             _changeAccountPasswords = changeAccountPasswords;
+            _locationService = locationService;
         }
 
         [HttpGet, ModelStateToTempData]
@@ -37,6 +40,8 @@ namespace CAHM.UI.Controllers
         {
             if (!ModelState.IsValid)
                 return RedirectToAction(MVC.Account.Actions.Register());
+
+            _locationService.UpdateLocation(model.Location);
 
             try
             {
@@ -63,6 +68,9 @@ namespace CAHM.UI.Controllers
         {
             if (!ModelState.IsValid)
                 return RedirectToAction(MVC.Account.Login());
+
+            _locationService.UpdateLocation(model.Location);
+
             var isValid = _logInAccounts.Login(model.Email, model.Password, model.Location);
             if (!isValid)
             {

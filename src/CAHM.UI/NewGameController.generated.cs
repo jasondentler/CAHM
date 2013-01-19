@@ -25,9 +25,6 @@ namespace CAHM.UI.Controllers
     public partial class NewGameController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public NewGameController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected NewGameController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -99,9 +96,9 @@ namespace CAHM.UI.Controllers
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Create()
+        public override System.Web.Mvc.RedirectToRouteResult Create()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
+            var callInfo = new T4MVC_System_Web_Mvc_RedirectToRouteResult(Area, Name, ActionNames.Create);
             return callInfo;
         }
 

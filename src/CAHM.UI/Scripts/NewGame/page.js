@@ -14,28 +14,88 @@
 
     var geolocationPromise = $.Deferred();
 
-    $(document).bind('location-set', function (position) {
+    $(document).bind('location-set', function (e, position) {
         geolocationPromise.resolve(position);
     });
 
     $(function () {
         var hub = $.connection.newGame;
 
+        hub.client.update = function (gameModel) {
+            var matches = $.map(viewModel.PendingGames(), function (item) {
+                return item.Id() == gameModel.Id ? item : null;
+            });
+
+            $.each(matches, function () {
+                var match = this;
+                match.GameStarted(gameModel.GameStarted);
+                var existingHashes = match.GravatarHashes();
+
+                var toRemove = $.map(existingHashes, function (item) {
+                    return $.inArray(item, gameModel.GravatarHashes) == -1 ? item : null;
+                });
+
+                var toAdd = $.map(gameModel.GravatarHashes, function (item) {
+                    return $.inArray(item, existingHashes) == -1 ? item : null;
+                });
+
+                $.each(toRemove, function () {
+                    var idx = $.inArray(this, match.GravatarHashes());
+                    match.GravatarHashes.splice(idx, 1);
+                });
+
+                $.each(toAdd, function () {
+                    match.GravatarHashes.push(this);
+                });
+
+                if (match.GravatarHashes().length == 0) {
+                    // No players? Remove it.
+                    var idx = $.inArray(match, viewModel.PendingGames());
+                    viewModel.PendingGames.splice(idx, 1);
+                }
+            });
+
+            if (matches.length == 0) {
+                //New game
+                viewModel.PendingGames.push({
+                    Id: ko.observable(gameModel.Id),
+                    GravatarHashes: ko.observableArray(gameModel.GravatarHashes),
+                    GameStarted: ko.observable(gameModel.GameStarted)
+                });
+            }
+        };
+
+        viewModel.SelectedGame.subscribe(function (gameId) {
+            hub.server.join(gameId);
+        });
+
         var startPromise = $.connection.hub.start().fail(function () {
             alert('Error connecting to the game server.');
         });
 
         $.when(geolocationPromise, startPromise).done(function (position) {
-            hub.server.findNearbyGames(position).done(function(data) {
-                $.each(data, function() {
+            function loadNearbyGames(pageNumber) {
+                hub.server.findNearbyGames(position, pageNumber).done(function (data) {
+                    if (data.MorePages)
+                        loadNearbyGames(pageNumber + 1);
+                    parseResults(data);
+                });
+            }
+
+            function parseResults(data) {
+                console.log(data);
+                $.each(data.Items, function () {
                     console.log(this);
                     viewModel.PendingGames.push({
                         Id: ko.observable(this.Id),
-                        Gravatars: ko.observableArray(this.Gravatars),
-                        Name: ko.observable('')
+                        GravatarHashes: ko.observableArray(this.GravatarHashes),
+                        GameStarted: ko.observable(this.GameStarted)
                     });
                 });
-            });
+            }
+
+            loadNearbyGames(1);
+
         });
     });
 

@@ -6,6 +6,19 @@ namespace CAHM.UI.Controllers
     [Authorize]
     public partial class NewGameController : Controller
     {
+        private readonly INewGameService _newGameService;
+        private readonly ILocationService _locationService;
+        private readonly ICurrentUserService _currentUserService;
+
+        public NewGameController(
+            INewGameService newGameService, 
+            ILocationService locationService,
+            ICurrentUserService currentUserService)
+        {
+            _newGameService = newGameService;
+            _locationService = locationService;
+            _currentUserService = currentUserService;
+        }
 
         [HttpGet]
         public virtual ViewResult List()
@@ -13,9 +26,12 @@ namespace CAHM.UI.Controllers
             return View(new NewGameModel());
         }
 
-        public virtual ActionResult Create()
+        [HttpPost]
+        public virtual RedirectToRouteResult Create()
         {
-            return Content("Create a new game here");
+            var email = _currentUserService.Email;
+            var game = _newGameService.Create(email);
+            return RedirectToAction(MVC.NewGame.List());
         }
 
     }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
 using CAHM.ViewModels;
 using Microsoft.AspNet.SignalR.Hubs;
 
@@ -14,12 +14,25 @@ namespace CAHM.UI.Hubs
             _newGameService = newGameService;
         }
 
-        public IEnumerable<object> FindNearbyGames(Location location)
+        public Page<NewGameModel> FindNearbyGames(Location location, int pageNumber)
         {
-            yield return new {Id = "asdf1", Gravatars = new[] {"1234567890"}};
-            yield return new {Id = "asdf2", Gravatars = new[] {"1234567890", "1234567890"}};
-            yield return new {Id = "asdf3", Gravatars = new[] {"1234567890", "1234567890", "1234567890"}};
-            yield return new {Id = "asdf4", Gravatars = new[] {"1234567890", "1234567890", "1234567890", "1234567890"}};
+            var pageOfGames = _newGameService.FindNearby(location, pageNumber);
+
+            pageOfGames.Items
+                       .Select(g => g.Id)
+                       .ToList()
+                       .ForEach(gameId => Groups.Add(Context.ConnectionId, gameId));
+
+            return pageOfGames;
+        }
+
+        public void Join(string id)
+        {
+            var changedGames = _newGameService.JoinGame(id, Context.User.Identity.Name);
+
+            changedGames
+                .ToList()
+                .ForEach(g => Clients.Group(g.Id).Update(g));
         }
 
     }

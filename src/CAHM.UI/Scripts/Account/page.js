@@ -15,7 +15,7 @@ $(function () {
         var grav = "";
         var email = emailField.val().toLowerCase().trim();
         var hash = CryptoJS.MD5(email);
-        grav = "http://www.gravatar.com/avatar/" + hash + ".jpg?r=pg&s=28&d=mm";
+        grav = "http://www.gravatar.com/avatar/" + hash + ".jpg?r=pg&s=28&d=retro";
         return grav;
     }
 

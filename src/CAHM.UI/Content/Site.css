@@ -90,3 +90,50 @@ h2.ghost
      height: 28px;
 }
 
+/* New Game
+-----------------------------------------------------------*/
+#pendingGames {
+    list-style-type: none;
+}
+
+#pendingGames input[type='radio']{
+    display: none;
+}
+
+#pendingGames img.gravatar {
+    padding: 0;
+    margin: 0;
+}
+
+#pendingGames img.gravatar:first-of-type {
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#pendingGames img.gravatar:last-of-type {
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#pendingGames li label
+{
+    border: 1px solid #CCCCCC;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+}
+
+#pendingGames li.selected label {
+    border-color: black;
+}
